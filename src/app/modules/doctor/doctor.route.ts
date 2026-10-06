@@ -3,7 +3,7 @@ import { DoctorController } from "./doctor.controller";
 
 const router =Router()
 
-router.post("/",DoctorController.getAllDoctors);
+router.get("/",DoctorController.getAllDoctors);
 
 
 export const DoctorRoutes=router;
