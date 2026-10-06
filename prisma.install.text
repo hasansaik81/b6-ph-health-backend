@@ -1,0 +1,200 @@
+mkdir express-prisma-auth
+cd express-prisma-auth
+npm init -y
+
+
+# মূল ডিপেন্ডেন্সি ইনস্টল
+npm install express dotenv cors bcrypt jsonwebtoken @prisma/client @prisma/adapter-pg pg
+
+# ডেভলপমেন্ট ডিপেন্ডেন্সি (TypeScript ও টাইপ ডিফিনিশন) ইনস্টল
+npm install -D typescript ts-node-dev prisma @types/node @types/express @types/cors @types/bcrypt @types/jsonwebtoken
+
+
+npx tsc --init
+
+
+npx prisma init
+
+
+
+১. আপাতত মেজর আপডেট (Prisma 8) এ না গিয়ে স্থিতিশীল ভার্সনে থাকা
+আপনার প্রজেক্টের কাজ স্মুথলি চালিয়ে যাওয়ার জন্য আপাতত Prisma 7.10.0-তেই থাকা ভালো। এতে কাস্টম পাথ বা মডিউল মিসিংয়ের মতো সমস্যাগুলো আর করবে না।
+
+প্রিজমা ৭-এ ফিরে যেতে বা সঠিকভাবে কাজ করতে টার্মিনালে নিচের কমান্ডগুলো দিয়ে আপনার স্টেবল ভার্সনটি রি-ইনস্টল ও ক্লায়েন্ট রি-জেনারেট করে নিন:
+npm install prisma@7.10.0 @prisma/client@7.10.0
+npx prisma generate
+
+
+২. যদি একান্তই Prisma 8-এ আপডেট করতে চান
+যদি আপনি প্রিজমা ৮ এর নতুন ফিচারগুলো প্রজেক্টে টেস্ট করতে চান, তবে নোটিফিকেশনে দেওয়া কমান্ডগুলো চালাতে পারেন:
+
+
+npm i --save-dev prisma@latest
+npm i @prisma/client@latest
+
+
+###  chatgpt  install code ###
+
+
+mkdir ph-health-backend
+cd ph-health-backend
+
+npm init -y
+
+npm install express cors dotenv http-status zod bcrypt jsonwebtoken cookie-parser
+
+npm install @prisma/client@7.10.0 @prisma/adapter-pg@7.10.0 pg
+
+npm install -D typescript ts-node-dev @types/node @types/express @types/cors @types/bcrypt @types/jsonwebtoken @types/cookie-parser @types/pg prisma@7.10.0
+npx tsc --init
+
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
+
+npx prisma init
+
+
+ph-health-backend/
+│
+├── node_modules/
+├── prisma/
+│   └── schema.prisma
+│
+├── src/
+│   └── server.ts
+│
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── tsconfig.json
+
+
+DATABASE_URL="postgresql://postgres:123456@localhost:5432/ph_health?schema=public"
+
+PORT=5000
+NODE_ENV=development
+
+JWT_SECRET=your-super-secret-key
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+server.ts
+
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "PH Health Backend is running",
+  });
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+
+app.ts
+
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+
+const app = express();
+
+// Middleware
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:5173"],
+    credentials: true,
+  }),
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Health check / root route
+app.get("/", (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "PH Health Backend is running!",
+  });
+});
+
+// 404 handler
+app.use((_req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
+
+export default app;
+
+
+npx prisma migrate dev --name init
+
+
+
+
+
+npm init -y
+
+npm install express cors dotenv http-status zod bcrypt jsonwebtoken cookie-parser
+
+npm install @prisma/client@7.10.0 @prisma/adapter-pg@7.10.0 pg
+
+npm install -D typescript ts-node-dev @types/node @types/express @types/cors @types/bcrypt @types/jsonwebtoken @types/cookie-parser @types/pg prisma@7.10.0
+
+npx tsc --init
+
+npx prisma init
+
+npx prisma migrate dev --name init
