@@ -1,4 +1,4 @@
-enum Role{
+enum Role {
     SUMPER_ADMIN
     ADMIN
     DOCTOR
@@ -6,13 +6,13 @@ enum Role{
 }
 
 
-enum UserStatus{
+enum UserStatus {
     BLOCKED
     DELETED
     ACTIVE
 }
 
-enum Gender{
+enum Gender {
     MALE
     FEMALE
 }

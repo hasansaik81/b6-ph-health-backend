@@ -18,11 +18,12 @@ model User {
   accounts      Account[]
    patietn      Patient?
   doctor        Doctor?
+   admins Admin ?
 
   @@unique([email])
   @@map("user")
  
-  admins Admin[]
+ 
 }
 
 model Session {

@@ -27,11 +27,14 @@ model Doctor {
     user    User  @relation(fields: [userId],references: [id],onDelete: Cascade,onUpdate: Cascade)
      specialties  DoctorSpecialty[]
 
-     @@index([email],name:"idx_docotor_email")
-     @@index([isDeleted],name:"idx_doctor_isDeleted")
-     @@map("doctor")
+
     appointments Appointment[]
     prescriptions Prescription[]
     reviews Review[]
     doctorSchedules DoctorSchedules[]
+
+     @@index([email],name:"idx_docotor_email")
+     @@index([isDeleted],name:"idx_doctor_isDeleted")
+     @@map("doctor")
+   
 }
