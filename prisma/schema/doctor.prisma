@@ -30,4 +30,8 @@ model Doctor {
      @@index([email],name:"idx_docotor_email")
      @@index([isDeleted],name:"idx_doctor_isDeleted")
      @@map("doctor")
+    appointments Appointment[]
+    prescriptions Prescription[]
+    reviews Review[]
+    doctorSchedules DoctorSchedules[]
 }
