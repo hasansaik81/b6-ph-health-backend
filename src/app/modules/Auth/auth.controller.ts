@@ -201,16 +201,53 @@ const resetPassword=catchAsync(
 )
 
 
-const googleLogin=catchAsync((req:Request,res:Response)=>{
-    const redirectPath=req.query.redirect || "/dashboard";
-    const encodedRedirectPath = encodeURIComponent(redirectPath as string);
-    const callBackURL=`${envVars.BETTER_AUTH_URL}/api/v1/auth/google/success?redirect=${encodedRedirectPath}`;
+// /api/v1/auth/login/google?redirect=/profile
 
-    res.render("googleRedurect",{
-        callBackURL:callBackURL,
-        betterAuthUrl:envVars.BETTER_AUTH_URL,
-    })
-})
+
+// const googleLogin=catchAsync((req:Request,res:Response)=>{
+//     const redirectPath=req.query.redirect || "/dashboard";
+//     const encodedRedirectPath = encodeURIComponent(redirectPath as string);
+//     const callBackURL=`${envVars.BETTER_AUTH_URL}/api/v1/auth/google/success?redirect=${encodedRedirectPath}`;
+
+//     res.render("googleRedurect",{
+//         callBackURL:callBackURL,
+//         betterAuthUrl:envVars.BETTER_AUTH_URL,
+//     })
+// })
+
+
+
+const googleLogin = catchAsync(
+  async (req: Request, res: Response) => {
+    const redirectPath =
+      (req.query.redirect as string) || "/dashboard";
+
+    const callbackURL = new URL(
+      "/api/v1/auth/google/success",
+      envVars.BETTER_AUTH_URL
+    );
+
+    callbackURL.searchParams.set("redirect", redirectPath);
+
+    const result = await auth.api.signInSocial({
+      body: {
+        provider: "google",
+        callbackURL: callbackURL.toString(),
+      },
+    });
+
+    if (!result.url) {
+      throw new AppError(
+        status.INTERNAL_SERVER_ERROR,
+        "Google authorization URL was not generated"
+      );
+    }
+
+    return res.redirect(result.url);
+  }
+);
+
+
 
 const googleLoginSuccess=catchAsync(async(req:Request,res:Response)=>{
     const redirectPath=req.query.redirect as string|| "/dashboard";
@@ -223,7 +260,7 @@ const googleLoginSuccess=catchAsync(async(req:Request,res:Response)=>{
    
     const session=await auth.api.getSession({
         headers:{
-            "Cookie":`better-ath.session_token=${sessionToken}`
+            "Cookie":`better-auth.session_token=${sessionToken}`
         }
     })
 
