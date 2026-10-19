@@ -336,7 +336,7 @@ const getNewToken=async (refreshToken:string,sessionToken:string)=>{
    }
 
 
-   const forgetPassowrd=async (email:string)=>{
+   const forgetPassword=async (email:string)=>{
      const isUserExist=await prisma.user.findUnique({
         where:{
             email,
@@ -441,14 +441,14 @@ const getNewToken=async (refreshToken:string,sessionToken:string)=>{
    };
 
 export const AuthService = {
-    registerPatient,
+     registerPatient,
     loginUser,
     getMe,
     getNewToken,
-    verifyEmail,
-    logoutUser,
-    forgetPassowrd,
     changePassword,
+    logoutUser,
+    verifyEmail,
+    forgetPassword,
     resetPassword,
     googleLoginSuccess,
     

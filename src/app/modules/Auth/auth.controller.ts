@@ -175,7 +175,7 @@ const verifyEmail=catchAsync(
 const forgetPassword=catchAsync(
     async(req:Request,res:Response)=>{
         const {email}=req.body;
-        await AuthService.forgetPassowrd(email);
+        await AuthService.forgetPassword(email);
 
         sendResponse(res,{
             httpStatusCode:status.OK,
@@ -214,6 +214,28 @@ const resetPassword=catchAsync(
 //         betterAuthUrl:envVars.BETTER_AUTH_URL,
 //     })
 // })
+
+
+
+// const googleLogin = catchAsync(
+//   async (req: Request, res: Response) => {
+//     const redirectPath = req.query.redirect || "/dashboard";
+
+//     const encodedRedirectPath = encodeURIComponent(
+//       redirectPath as string
+//     );
+
+//     const callbackURL =
+//       `${envVars.BETTER_AUTH_URL}/api/v1/auth/google/success` +
+//       `?redirect=${encodedRedirectPath}`;
+
+//     res.render("googleRedurect", {
+//       callbackURL,
+//       betterAuthUrl: envVars.BETTER_AUTH_URL,
+//     });
+//   }
+// );
+
 
 
 

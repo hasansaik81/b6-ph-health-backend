@@ -1,6 +1,6 @@
 import express from 'express';
 import { AuthController } from './auth.controller';
-import { cheeckAuth } from '../../middleware/checkAuth';
+import { checkAuth } from '../../middleware/checkAuth';
 import { Role } from '../../../generated/prisma/enums';
 
 const router = express.Router();
@@ -8,10 +8,10 @@ const router = express.Router();
 
 router.post("/register", AuthController.registerPatient);
 router.post("/login", AuthController.loginUser);
-router.get("/me",cheeckAuth(Role.ADMIN,Role.DOCTOR,Role.PATIENT,Role.SUPER_ADMIN),AuthController.getMe)
+router.get("/me",checkAuth(Role.ADMIN,Role.DOCTOR,Role.PATIENT,Role.SUPER_ADMIN),AuthController.getMe)
 router.post("/refresh-token",AuthController.getNewToken)
-router.post("/change-password",cheeckAuth(Role.ADMIN,Role.DOCTOR,Role.PATIENT,Role.SUPER_ADMIN),AuthController.changePassworb)
-router.post("/logout", cheeckAuth(Role.ADMIN, Role.DOCTOR, Role.PATIENT, Role.SUPER_ADMIN), AuthController.logoutUser)
+router.post("/change-password",checkAuth(Role.ADMIN,Role.DOCTOR,Role.PATIENT,Role.SUPER_ADMIN),AuthController.changePassworb)
+router.post("/logout", checkAuth(Role.ADMIN, Role.DOCTOR, Role.PATIENT, Role.SUPER_ADMIN), AuthController.logoutUser)
 router.post("/verify-email", AuthController.verifyEmail)
 router.post("/forget-password", AuthController.forgetPassword)
 router.post("/reset-password", AuthController.resetPassword)

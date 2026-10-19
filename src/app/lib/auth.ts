@@ -50,27 +50,27 @@ export const auth = betterAuth({
             role:{
                 type:"string",
                 required:true,
-                defaultvalue:Role.PATIENT
+                defaultValue:Role.PATIENT
             },
             status:{
                 type:"string",
                 required:true,
-                defaultvalue:UserStatus.ACTIVE
+                defaultValue:UserStatus.ACTIVE
             },
             needPasswordChange:{
                 type:"boolean",
                 required:true,
-                defaultvalue:false
+                defaultValue:false
             },
             isDeleted:{
             type:"boolean",
             required:true,
-            defaultvalue:false
+            defaultValue:false
             },
             deletedAt:{
                 type:"date",
                 required:false,
-                defaultvalue:null
+                defaultValue:null
             },
 
         }

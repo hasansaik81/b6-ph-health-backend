@@ -7,7 +7,7 @@ import status from "http-status";
 import { jwtUtils } from "../utils/jwt";
 import { envVars } from "../config/env";
 
-export const cheeckAuth=(...authRoles:Role[])=>async(req:Request,res:Response,next:NextFunction)=>{
+export const checkAuth=(...authRoles:Role[])=>async(req:Request,res:Response,next:NextFunction)=>{
     try{
           //Session Token Verification
           const sessionToken=CookieUtils.getCookie(req,"better-auth.session_token");
