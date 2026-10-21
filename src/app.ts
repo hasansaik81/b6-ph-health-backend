@@ -22,8 +22,8 @@
 //   allowedHeaders:["content-Type","Authorization"]
 // }))
 
-// // app.use("/api/auth",toNodeHandler(auth))
-// app.all("/api/v1/auth/*splat", toNodeHandler(auth));
+// app.use("/api/auth",toNodeHandler(auth))
+// // app.all("/api/v1/auth/*splat", toNodeHandler(auth));
 // app.use(express.urlencoded({extended:true}))
 
 // // Middleware to parse JSON bodies

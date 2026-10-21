@@ -9,10 +9,10 @@ import { checkAuth } from "../../middleware/checkAuth";
 const router=Router();
 
 router.get("/",
-    cheeckAuth(Role.ADMIN,Role.SUPER_ADMIN),
+    checkAuth(Role.ADMIN,Role.SUPER_ADMIN),
     AdminController.getAllAdmins);
     router.get("/:id",
-        cheeckAuth(Role.ADMIN,Role.SUPER_ADMIN),
+        checkAuth(Role.ADMIN,Role.SUPER_ADMIN),
         AdminController.getAdminById);
 
      router.patch("/:id",
@@ -30,8 +30,5 @@ export const AdminRoutes=router;
 
             
         
-    
-function cheeckAuth(ADMIN: string, SUPER_ADMIN: string): import("express-serve-static-core").RequestHandler<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>> {
-   throw new Error("Function not implemented.");
-}
+
 

@@ -39,6 +39,7 @@ export const sendEmail = async ({
   try {
     // Implement email sending here
     const templatePath=path.resolve(process.cwd(),`src/app/templates/${templateName}.ejs`)
+    
     const html=await ejs.renderFile(templatePath,templateData);
     const info=await transporter.sendMail({
     from:envVars.EMAIL_SENDER.SMTP_FROM,
