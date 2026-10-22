@@ -90,6 +90,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(express.urlencoded({ extended: true }));
+
 // Better Auth handler — before application 404 middleware
 // app.all("/api/v1/auth/*splat", toNodeHandler(auth));
 app.use("/api/auth",toNodeHandler(auth))

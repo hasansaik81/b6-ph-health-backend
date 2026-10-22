@@ -1,39 +1,5 @@
 
 
-
-
-// import multer from "multer";
-
-// const storage = multer.memoryStorage();
-
-// const fileFilter: multer.Options["fileFilter"] = (
-//   _req,
-//   file,
-//   callback
-// ) => {
-//   const isImage = file.mimetype.startsWith("image/");
-//   const isPdf = file.mimetype === "application/pdf";
-
-//   if (isImage || isPdf) {
-//     return callback(null, true);
-//   }
-
-//   return callback(new Error("Only image and PDF files are allowed"));
-// };
-
-// export const multerUpload = multer({
-//   storage,
-//   limits: {
-//     fileSize: 5 * 1024 * 1024, // 5 MB
-//   },
-//   fileFilter,
-// });
-
-
-
-
-
-
 import multer from "multer";
 // import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { cloudinaryUpload } from "./cloudinary.config";
@@ -73,4 +39,4 @@ const storage = new CloudinaryStorage({
 
 })
 
-export const multerUpload = multer({storage})
+export const multerUpload = multer({storage})  

@@ -9,3 +9,5 @@ const createSpecialtyZodSchema=z.object({
 export const SpecialtyValidation={
     createSpecialtyZodSchema
 }
+
+
