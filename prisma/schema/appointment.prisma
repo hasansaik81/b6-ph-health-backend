@@ -1,10 +1,10 @@
 model Appointment{
-    id    String @id @default(uuid(7))
-    videoCallingId   String
-    status         AppointmentStatus  @default(SCHEDULED)
-    paymentStatus   PaymentStatus     @default(UNPAID)
-    createdAT        DateTime         @default(now())
-    updatedAt       DateTime          @updatedAt
+    id             String            @id @default(uuid(7))
+    videoCallingId String   @db.Uuid() @unique
+    status         AppointmentStatus @default(SCHEDULED)
+    paymentStatus  PaymentStatus     @default(UNPAID)
+    createdAt      DateTime          @default(now())
+    updatedAt      DateTime          @updatedAt
 
     paintedId     String
     patient    Patient @relation(fields: [paintedId],references: [id],onDelete: Cascade)

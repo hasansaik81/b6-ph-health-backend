@@ -63,8 +63,10 @@ import { envVars } from "./app/config/env";
 import { auth } from "./app/lib/auth";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import { notFound } from "./app/middleware/notFound";
+import qs from "qs";
 
 const app: Application = express();
+app.set("query parser", (str : string) => qs.parse(str));
 
 // EJS configuration
 app.set("view engine", "ejs");
