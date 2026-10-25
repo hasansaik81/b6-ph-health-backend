@@ -5,6 +5,7 @@ import { UserRoutes } from "../modules/user/user.route"
 import { DoctorRoutes } from "../modules/doctor/doctor.route"
 import { AdminRoutes } from "../modules/admin/admin.route"
 import { scheduleRoutes } from "../modules/schedule/schedule.route"
+import { AppointmentRoutes } from "../modules/appointment/appointment.route"
 
 const router=Router()
 router.use("/auth",AuthRoutes)
@@ -13,5 +14,6 @@ router.use("/users",UserRoutes)
 router.use("/doctors",DoctorRoutes)
 router.use("/admins",AdminRoutes)
 router.use("/schedules",scheduleRoutes)
+router.use("/appointments",AppointmentRoutes)
 
 export default router

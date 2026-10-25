@@ -38,7 +38,12 @@ interface EnvConfig{
       CLOUDINARY_CLOUD_NAME:string;
       CLOUDINARY_API_KEY:string;
       CLOUDINARY_API_SECRET:string;
-    }
+    },
+
+     STRIPE:{
+        STRIPE_SECRET_KEY: string;
+        STRIPE_WEBHOOK_SECRET: string;
+    },
 }
 
 
@@ -67,6 +72,8 @@ const loadEnvVariables = (): EnvConfig => {
     'CLOUDINARY_CLOUD_NAME',
     'CLOUDINARY_API_KEY',
     'CLOUDINARY_API_SECRET',
+    'STRIPE_SECRET_KEY',
+    'STRIPE_WEBHOOK_SECRET',
   ];
 
   requireEnvVariable.forEach((variable)=>{
@@ -99,11 +106,18 @@ const loadEnvVariables = (): EnvConfig => {
         GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
         GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL as string,
         FRONTEND_URL: process.env.FRONTEND_URL as string,
-         CLOUDINARY: {
+        CLOUDINARY: {
             CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME as string,
             CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY as string,
             CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET as string,
-        }
+        },
+
+
+
+        STRIPE: {
+            STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY as string,
+            STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET as string,
+        },
   }
 
 };
