@@ -1,4 +1,5 @@
-import { string, success, uuidv7 } from "zod";
+// import { string, success, uuidv7 } from "zod";
+import { v7 as uuidv7 } from "uuid";
 import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { prisma } from "../../lib/prisma";
 import { IBookAppointmentPayload } from "./appointment.interface";
@@ -6,7 +7,7 @@ import { envVars } from "../../config/env";
 import { stripe } from "../../config/stripe.config";
 import AppError from "../../errorHelper/AppError";
 import status from "http-status";
-import { PaymentStatus } from "../../../generated/prisma/enums";
+import { PaymentStatus, Role } from "../../../generated/prisma/enums";
 import { AppointmentStatus } from './../../../generated/prisma/enums';
 
 
@@ -44,7 +45,7 @@ const bookAppointment=async(payload:IBookAppointmentPayload,user:IRequestUser)=>
             data:{
                 doctorId:payload.doctorId,
                 paintedId:patientData.id,
-                scheduledId:doctorSchedule.scheduleId,
+                scheduleId:doctorSchedule.scheduleId,
                 videoCallingId,
             }
         });
@@ -71,25 +72,26 @@ const bookAppointment=async(payload:IBookAppointmentPayload,user:IRequestUser)=>
             }
           });
 
-          const session =await stripe.checkout.sessions.create({
-            payment_method_types:['card'],
-            mode:'payment',
-            line_items:[
+    const session = await stripe.checkout.sessions.create({
+        //    payment_method_types: ["card"],
+            mode: 'payment',
+            line_items :[
                 {
                     price_data:{
                         currency:"bdt",
                         product_data:{
-                            name:`Appointment with Dr.${doctorData.name}`,
+                            name : `Appointment with Dr. ${doctorData.name}`,
                         },
-                        unit_amount:doctorData.appointmentFee*100,
+                        unit_amount : doctorData.appointmentFee * 100,
                     },
-                    quantity:1,
+                    quantity : 1,
                 }
             ],
             metadata:{
-                appointmentId:appointmentData.id,
-                paymentId:patientData.id,
+                appointmentId : appointmentData.id,
+                paymentId : paymentData.id,
             },
+
             success_url:`${envVars.FRONTEND_URL}/dashboard/payment/payment-success`,
                         // cancel_url: `${envVars.FRONTEND_URL}/dashboard/payment/payment-failed`,
                cancel_url:`${envVars.FRONTEND_URL}/dashboard/appointments`         
@@ -277,7 +279,7 @@ const bookAppointmentWithPayLater=async(payload:IBookAppointmentPayload,user:IRe
             data:{
                 doctorId:payload.doctorId,
                 paintedId:patientData.id,
-                scheduledId:doctorSchedule.scheduleId,
+                scheduleId:doctorSchedule.scheduleId,
                 videoCallingId,
             }
         });
@@ -344,8 +346,8 @@ const initiatePayment=async (appointmentId:string,user:IRequestUser)=>{
     }
 
     const session =await stripe.checkout.sessions.create({
-        payment_method_types:['card'],
-        node:'payment',
+        //    payment_method_types: ["card"],
+        mode:'payment',
         line_items:[
             {
                 price_data:{

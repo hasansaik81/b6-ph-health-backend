@@ -8,8 +8,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "stripe:webhook": "stripe listen --forward-to localhost:5000/webhook"
-  },
+     "stripe:webhook":"stripe listen --events payment_intent.succeeded,checkout.session.completed --forward-to localhost:5000/webhook"
+     },
   "keywords": [],
   "type": "commonjs",
   "dependencies": {
@@ -38,6 +38,7 @@
     "qs": "^6.16.1",
     "stripe": "^23.0.1",
     "typescript-eslint": "^8.71.0",
+    "uuid": "^14.0.3",
     "zod": "^4.6.5"
   },
   "devDependencies": {

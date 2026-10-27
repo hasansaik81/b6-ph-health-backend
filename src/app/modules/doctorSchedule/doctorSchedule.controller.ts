@@ -4,8 +4,10 @@ import { IQueryParams } from "../../interfaces/query.interface";
 import { catchAsync } from "../../shared/catchAsync";
 import { sendResponse } from "../../shared/sendResponse";
 import { DoctorScheduleService } from "./doctorSchedule.service";
+import AppError from "../../errorHelper/AppError";
 
 const createMyDoctorSchedule = catchAsync( async (req : Request, res : Response) => {
+       console.log("Authenticated user:", req.user);
     const payload = req.body;
     const user = req.user;
     const doctorSchedule = await DoctorScheduleService.createMyDoctorSchedule(user, payload);
@@ -16,6 +18,38 @@ const createMyDoctorSchedule = catchAsync( async (req : Request, res : Response)
         data: doctorSchedule
     });
 });
+
+
+// chatgpt code 
+
+
+// const createMyDoctorSchedule = catchAsync(
+//   async (req: Request, res: Response) => {
+//     console.log("Controller req.user:", req.user);
+
+//     if (!req.user) {
+//       throw new AppError(
+//         status.UNAUTHORIZED,
+//         "Authenticated user not found. Check checkAuth middleware."
+//       );
+//     }
+
+//     const payload = req.body;
+
+//     const doctorSchedule =
+//       await DoctorScheduleService.createMyDoctorSchedule(
+//         req.user,
+//         payload
+//       );
+
+//     sendResponse(res, {
+//       success: true,
+//       httpStatusCode: status.CREATED,
+//       message: "Doctor schedule created successfully",
+//       data: doctorSchedule,
+//     });
+//   }
+// );
 
 const getMyDoctorSchedules = catchAsync(async (req: Request, res: Response) => {
     const user = req.user;
