@@ -44,7 +44,7 @@ const bookAppointment=async(payload:IBookAppointmentPayload,user:IRequestUser)=>
         const appointmentData=await tx.appointment.create({
             data:{
                 doctorId:payload.doctorId,
-                paintedId:patientData.id,
+                patientId:patientData.id,
                 scheduleId:doctorSchedule.scheduleId,
                 videoCallingId,
             }
@@ -73,7 +73,7 @@ const bookAppointment=async(payload:IBookAppointmentPayload,user:IRequestUser)=>
           });
 
     const session = await stripe.checkout.sessions.create({
-           payment_method_types: ["card"],
+        //    payment_method_types: ["card"],
             mode: 'payment',
             line_items :[
                 {
@@ -127,7 +127,7 @@ const getMyAppointments=async(user:IRequestUser)=>{
  if(patientData){
     appointmets=await prisma.appointment.findMany({
         where:{
-            paintedId:patientData.id
+            patientId:patientData.id
         },
         include:{
             doctor:true,
@@ -278,7 +278,7 @@ const bookAppointmentWithPayLater=async(payload:IBookAppointmentPayload,user:IRe
         const appointmentData=await tx.appointment.create({
             data:{
                 doctorId:payload.doctorId,
-                paintedId:patientData.id,
+                patientId:patientData.id,
                 scheduleId:doctorSchedule.scheduleId,
                 videoCallingId,
             }
