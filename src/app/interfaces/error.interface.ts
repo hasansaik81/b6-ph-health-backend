@@ -10,5 +10,5 @@ export interface TErrorResponse{
     message:string;
     errorSources:TErrorSources[]
     stack?:string;
-    error:unknown;
+    error?:unknown;
 }
