@@ -6,6 +6,12 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
+    "lint": "eslint ./src/**/*",
+    "migrate": "prisma migrate dev",
+    "generate": "prisma generate",
+    "studio": "prisma studio",
+    "push": "prisma db push",
+    "pull": "prisma db pull",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "stripe:webhook": "stripe listen --events payment_intent.succeeded,checkout.session.completed --forward-to localhost:5000/webhook"
