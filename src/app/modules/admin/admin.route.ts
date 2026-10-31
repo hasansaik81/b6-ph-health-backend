@@ -24,6 +24,14 @@ router.get("/",
             AdminController.updateAdmin);
 
 
+   router.patch("/change-user-status", 
+    checkAuth(Role.SUPER_ADMIN, Role.ADMIN),
+   AdminController.changeUserStatus);
+router.patch("/change-user-role",
+     checkAuth(Role.SUPER_ADMIN),
+     AdminController.changeUserRole);
+
+
 export const AdminRoutes=router;
          
 

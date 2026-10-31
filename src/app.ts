@@ -57,7 +57,7 @@ import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import { toNodeHandler } from "better-auth/node";
-
+import cron from "node-cron";
 import IndexRoutes from "./app/routes";
 import { envVars } from "./app/config/env";
 import { auth } from "./app/lib/auth";
@@ -65,6 +65,7 @@ import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import { notFound } from "./app/middleware/notFound";
 import qs from "qs";
 import { PaymentController } from "./app/modules/payment/payment.controller";
+import { AppointmentService } from "./app/modules/appointment/appointment.service";
 
 const app: Application = express();
 app.set("query parser", (str : string) => qs.parse(str));
@@ -112,6 +113,15 @@ app.use(express.urlencoded({ extended: true }));
 // Better Auth handler — before application 404 middleware
 // app.all("/api/v1/auth/*splat", toNodeHandler(auth));
 app.use("/api/auth",toNodeHandler(auth))
+
+
+cron.schedule("*/25 * * * *",async()=>{
+  try{console.log("Running cron job to cancel unpaid appointmets...");
+    await AppointmentService.cancelUnpaidAppointments();
+  }catch(error:any){
+    console.error("Error occurred while canceling unpaid appointments:",error.message);
+  }
+})
 
 // Application routes
 app.use("/api/v1", IndexRoutes);
