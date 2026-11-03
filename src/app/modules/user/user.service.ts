@@ -79,7 +79,7 @@ const createDoctor=async(payload:ICreateDoctorPayload)=>{
                     contactNumber:true,
                     address:true,
                     registrationNumber:true,
-                    exprience:true,
+                    experience:true,
                     gender:true,
                     appointmentFee:true,
                     qualification:true,

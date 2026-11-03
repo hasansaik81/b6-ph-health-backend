@@ -198,3 +198,5 @@ npx tsc --init
 npx prisma init
 
 npx prisma migrate dev --name init
+
+    // "stripe:webhook": "stripe listen --events payment_intent.succeeded,checkout.session.completed --forward-to localhost:5000/webhook"

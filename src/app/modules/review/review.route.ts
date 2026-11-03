@@ -22,4 +22,4 @@ router.patch('/:id', checkAuth(Role.PATIENT), validateRequest(ReviewValidation.u
 router.delete('/:id', checkAuth(Role.PATIENT), ReviewController.deleteReview);
 
 
-export const ReviewRoute=router;
+export const ReviewRoutes=router;

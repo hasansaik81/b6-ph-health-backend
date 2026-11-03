@@ -106,7 +106,7 @@ if(!refreshToken){
     
 )
 
-const changePassworb=catchAsync(
+const changePassword=catchAsync(
     async(req:Request,res:Response)=>{
         const payload=req.body;
         const betterAuthSessionToken=req.body["better-auth.session_token"];
@@ -317,7 +317,7 @@ export const AuthController = {
     loginUser,
     getMe,
     getNewToken,
-    changePassworb,
+    changePassword,
     logoutUser,
     verifyEmail,
     forgetPassword,

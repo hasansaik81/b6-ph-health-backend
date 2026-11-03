@@ -1,7 +1,7 @@
 model Review {
     id     String  @id @default(uuid(7))
     rating  Float  @default(0.0)
-    commet  String?  @db.Text
+    comment  String?  @db.Text
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
 

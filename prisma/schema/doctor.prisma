@@ -10,7 +10,7 @@ model Doctor {
     deletedAt    DateTime?
 
     registrationNumber   String  @unique
-    exprience       Int  @default(0)
+    experience       Int  @default(0)
     gender         Gender
     appointmentFee   Float
     qualification    String

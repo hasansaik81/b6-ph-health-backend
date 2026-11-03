@@ -9,7 +9,7 @@ import { validateRequest } from "../../middleware/validateRequest";
 const router=Router();
 
 router.post('/', 
-    checkAuth(Role.ADMIN, Role.SUPER_ADMIN), 
+    // checkAuth(Role.ADMIN, Role.SUPER_ADMIN), 
     validateRequest(ScheduleValidation.createScheduleZodSchema) , ScheduleController.createSchudule);
 
     router.get('/',checkAuth(Role.ADMIN,Role.SUPER_ADMIN,Role.DOCTOR),
