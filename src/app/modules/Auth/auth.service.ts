@@ -56,7 +56,7 @@ const registerPatient=async(payload:IRegisterPatientPayload)=>{
         emailVerified:data.user.emailVerified,
 
     });
-    const refreshToken=tokenUtils.getAccessToken({
+    const refreshToken=tokenUtils.getRefreshToken({
         userId:data.user.id,
         role:data.user.role,
         name:data.user.name,
@@ -139,7 +139,7 @@ const getMe = async (user: IRequestUser) => {
             id: user.userId,
         },
         include:{
-            patietn:{
+            patient:{
                 include:{
                     appointments:true,
                     reviews:true,
@@ -153,7 +153,7 @@ const getMe = async (user: IRequestUser) => {
                     specialties:true,
                     appointments:true,
                     reviews:true,
-                    prescription:true,
+                    prescriptions:true,
                 }
             },
             admin:true,
@@ -184,6 +184,7 @@ const getNewToken=async (refreshToken:string,sessionToken:string)=>{
     }
 
     const verifiedRefreshToken=jwtUtils.verifyToken(refreshToken, envVars.REFRESH_TOKEN_SECRET)
+
        if(!verifiedRefreshToken.success && verifiedRefreshToken.error){
         throw new AppError(status.UNAUTHORIZED,"Invalid refresh token");
        }
@@ -223,7 +224,7 @@ const getNewToken=async (refreshToken:string,sessionToken:string)=>{
 
        return {
         accessToken:newAccessToken,
-        refreshToken:newAccessToken,
+        refreshToken:newRefreshToken,
         sessionToken:token,
        }
 

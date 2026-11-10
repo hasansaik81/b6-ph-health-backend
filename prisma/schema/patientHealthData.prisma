@@ -1,29 +1,26 @@
 model PatientHealthData {
-    id    String  @id  @default(uuid())
-    gender    Gender
-    dateOfBirth    DateTime
-    bloodGroup     BloodGroup
-    hasAllergies   Boolean  @default(false)
-    hasDiabetes    Boolean  @default(false)
-    height       String
-    weight       String
-    smokingStatus   Boolean   @default(false)
-    dietaryPreferences    String?
-    pregnancyStstus   Boolean    @default(false)
-    mentalHealthHistory   String?
-    immunizationStatus    String?
-    hasPastSurgeries     Boolean  @default(false)
-    recentAnxiety      Boolean    @default(false)
-    maritalStatus      String?
-    createdAt      DateTime   @default(now())
-    updatedAt       DateTime   @updatedAt
+  id                  String     @id @default(uuid())
+  gender              Gender
+  dateOfBirth         DateTime
+  bloodGroup          BloodGroup
+  hasAllergies        Boolean    @default(false)
+  hasDiabetes         Boolean    @default(false)
+  height              String
+  weight              String
+  smokingStatus       Boolean    @default(false)
+  dietaryPreferences  String?
+  pregnancyStstus     Boolean    @default(false)
+  mentalHealthHistory String?
+  immunizationStatus  String?
+  hasPastSurgeries    Boolean    @default(false)
+  recentAnxiety       Boolean    @default(false)
+  maritalStatus       String?
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
 
-    patientId  String @unique
-    patient   Patient @relation(fields: [patientId],references: [id],onDelete: Cascade)
+  patientId String  @unique
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
 
-
-@@index([patientId])
-@@map("patient_health_data")
-
-
+  @@index([patientId])
+  @@map("patient_health_data")
 }
